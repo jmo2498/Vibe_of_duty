@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe of Duty - Weekend FPS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+        }
+        
+        #gameContainer {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        #loadingScreen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 100;
+        }
+        
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 50;
+        }
+        
+        #crosshair::before,
+        #crosshair::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        #crosshair::before {
+            top: 50%;
+            left: 8px;
+            width: 4px;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+        
+        #crosshair::after {
+            left: 50%;
+            top: 8px;
+            width: 2px;
+            height: 4px;
+            transform: translateX(-50%);
+        }
+        
+        #healthBar {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 200px;
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            z-index: 50;
+            pointer-events: none;
+        }
+        
+        #healthFill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000 0%, #ffff00 50%, #00ff00 100%);
+            border-radius: 8px;
+            transition: width 0.3s ease;
+            width: 100%;
+        }
+        
+        #healthText {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+        }
+        
+        #ammoCounter {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 50;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="loadingScreen">
+            <h2>Vibe of Duty</h2>
+            <p>Loading...</p>
+        </div>
+        <div id="crosshair"></div>
+        <div id="healthBar">
+            <div id="healthFill"></div>
+            <div id="healthText">100/100</div>
+        </div>
+        <div id="ammoCounter">30/30</div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Game Scripts -->
+    <script src="src/core/AssetLoader.js"></script>
+    <script src="src/level/Level.js"></script>
+    <script src="src/entities/Projectile.js"></script>
+    <script src="src/weapons/Weapon.js"></script>
+    <script src="src/entities/Enemy.js"></script>
+    <script src="src/entities/EnemyManager.js"></script>
+    <script src="src/entities/Player.js"></script>
+    <script src="src/input/InputHandler.js"></script>
+    <script src="src/ui/HUD.js"></script>
+    <script src="src/core/Scene.js"></script>
+    <script src="src/core/Game.js"></script>
+    
+    <script>
+        // Initialize the game when page loads
+        window.addEventListener('load', () => {
+            const game = new Game();
+            game.init();
+        });
+    </script>
+</body>
+</html>
